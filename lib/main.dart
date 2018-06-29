@@ -28,6 +28,7 @@ class WorkParty {
   DateTime start_date_time;
   double estimated_work_party_size;
   String leader;
+  String image_url;
 
   WorkParty();
 
@@ -38,6 +39,17 @@ class WorkParty {
     wpItem.name = json['name'];
     wpItem.estimated_work_party_size = json['estimated_work_party_size'];
     wpItem.leader = json['leader']['name'];
+    wpItem.image_url = json['image_url']?.toString();
+
+    if (wpItem.image_url == null || wpItem.image_url.isEmpty)
+    {
+        wpItem.image_url = 'https://www.wta.org/++theme++plonetheme.wta/images/wta-logo.png';
+    }
+
+    if (wpItem.image_url.startsWith('//www.wta.org'))
+    {
+        wpItem.image_url = 'https:' + wpItem.image_url;
+    }
 
     return wpItem;
   }
@@ -112,8 +124,36 @@ class WorkPartyListWidget extends StatelessWidget {
     return new ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return new Text(items[index].toString());
+        return new WorkPartyItemWidget(items[index]);
       },
+    );
+  }
+}
+
+class WorkPartyItemWidget extends StatelessWidget {
+  final WorkParty item;
+
+  WorkPartyItemWidget(this.item);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Column(
+      children: <Widget>[
+        new Divider(color: Colors.lightBlue),
+        new Row(
+          children: <Widget>[
+            new Expanded(
+            child: new Image.network(item.image_url),
+            ),
+            new Expanded(
+            child: new Text(item.name, textAlign: TextAlign.center),
+            ),
+            new Expanded(
+            child: new Text(item.leader, textAlign: TextAlign.center),
+            )
+          ],
+        )
+      ],
     );
   }
 }
