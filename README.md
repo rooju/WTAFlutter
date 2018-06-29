@@ -1,0 +1,8 @@
+# wta_flutter
+
+Flutter application for WTA work party management
+
+## Getting Started
+
+For help getting started with Flutter, view our online
+[documentation](https://flutter.io/).
