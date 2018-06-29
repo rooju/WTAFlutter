@@ -48,27 +48,9 @@ class WorkParty {
   }
 }
 
-class AllItems {
-  List<WorkParty> all_items;
-
-  AllItems();
-
-  factory AllItems.fromJson(dynamic allItemsJson) {
-    var wp = new AllItems();
-
-    wp.all_items = new List<WorkParty>();
-    for (var item in allItemsJson)
-    {
-      wp.all_items.add(WorkParty.fromJson(item));
-    }
-
-    return wp;
-  }
-}
-
 class WorkParties {
   bool showRosterRequests;
-  AllItems items;
+  List<WorkParty> items;
 
   WorkParties();
 
@@ -76,7 +58,12 @@ class WorkParties {
     var wp = new WorkParties();
 
     wp.showRosterRequests = json['show_roster_requests'];
-    wp.items = AllItems.fromJson(json['results']['all_items']);
+
+    wp.items = new List<WorkParty>();
+    for (var item in json['results']['all_items'])
+    {
+      wp.items.add(WorkParty.fromJson(item));
+    }
     return wp;
   }
 }
@@ -100,7 +87,7 @@ class MyApp extends StatelessWidget {
             future: fetchPost(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data.items.all_items[0].toString());
+                return new WorkPartyListWidget(items: snapshot.data.items);
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
@@ -111,6 +98,22 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class WorkPartyListWidget extends StatelessWidget {
+  final List<WorkParty> items;
+
+  WorkPartyListWidget({Key key, this.items}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return new ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return new Text(items[index].toString());
+      },
     );
   }
 }
