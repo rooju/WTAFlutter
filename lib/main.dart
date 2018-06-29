@@ -61,15 +61,12 @@ class WorkParty {
 }
 
 class WorkParties {
-  bool showRosterRequests;
   List<WorkParty> items;
 
   WorkParties();
 
   factory WorkParties.fromJson(Map<String, dynamic> json) {
     var wp = new WorkParties();
-
-    wp.showRosterRequests = json['show_roster_requests'];
 
     wp.items = new List<WorkParty>();
     for (var item in json['results']['all_items'])
