@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wta_flutter/model/WorkParty.dart';
+import 'package:wta_flutter/widgets/WorkPartyDetail.dart';
 
 class WorkPartyDetailPage extends StatelessWidget {
   final WorkParty _item;
@@ -12,14 +13,7 @@ class WorkPartyDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(_item.name),
       ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
+      body: WorkPartyDetailWidget(_item),
     );
   }
 }
