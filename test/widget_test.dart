@@ -6,7 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:wta_flutter/widgets/app.dart';
+import 'package:wta_flutter/widgets/MainLandingPage.dart';
 
 import 'package:wta_flutter/main.dart';
 

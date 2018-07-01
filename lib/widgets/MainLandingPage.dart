@@ -6,13 +6,13 @@ class WTAApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Fetch Data Example',
+      title: 'Washington Trails Association Work Party App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Fetch Data Example'),
+          title: Text('Work Parties'),
         ),
         body: Center(
           child: FutureBuilder<WorkParties>(
