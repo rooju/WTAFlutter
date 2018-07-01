@@ -6,25 +6,21 @@ class WorkPartyDetailWidget extends StatelessWidget {
 
   WorkPartyDetailWidget(this._item);
 
+  Widget _builder(BuildContext context, int index)
+  {
+    switch(index)
+    {
+      case 0:
+        // First element is the image.
+        return new Image.network(_item.image_url);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      children: <Widget>[
-        new Divider(color: Colors.lightBlue),
-        new Row(
-          children: <Widget>[
-            new Expanded(
-              child: new Image.network(_item.image_url),
-            ),
-            new Expanded(
-              child: new Text(_item.name, textAlign: TextAlign.center),
-            ),
-            new Expanded(
-              child: new Text(_item.leader, textAlign: TextAlign.center),
-            )
-          ],
-        )
-      ],
+    return new ListView.builder(
+      itemCount: 1,
+      itemBuilder: _builder
     );
   }
 }
