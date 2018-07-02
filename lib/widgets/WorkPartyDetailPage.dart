@@ -11,9 +11,12 @@ class WorkPartyDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_item.name),
+        title: ListTile(
+            title: Text(_item.name, style: Theme.of(context).accentTextTheme.body2),
+            subtitle: Text(_item.type.name, style: Theme.of(context).accentTextTheme.caption),
+        ),
       ),
-      body: WorkPartyDetailWidget(_item),
+      body: WorkPartyDetailWidget(context, _item)
     );
   }
 }

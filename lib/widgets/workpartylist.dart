@@ -12,7 +12,7 @@ class WorkPartyListWidget extends StatelessWidget {
     return new ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return new WorkPartyItemWidget(items[index]);
+        return new WorkPartyItemWidget(context, items[index]);
       },
     );
   }

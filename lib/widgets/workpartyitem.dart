@@ -4,13 +4,12 @@ import 'package:wta_flutter/widgets/WorkPartyDetailPage.dart';
 
 class WorkPartyItemWidget extends StatelessWidget {
   final WorkParty _item;
-  BuildContext _context;
+  final BuildContext _context;
 
-  WorkPartyItemWidget(this._item);
+  WorkPartyItemWidget(this._context, this._item);
 
   @override
   Widget build(BuildContext context) {
-    _context = context;
     return new InkWell(
       child: new Column(
         children: <Widget>[

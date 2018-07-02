@@ -2,19 +2,21 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-
 class WorkParty {
   String name;
   String what_it_takes;
   String overview;
+  String aboutArea;
   double number_of_assistant_crew_leaders;
   String work_party_schedule;
   String project_description;
   double number_of_crew_leaders;
-  DateTime start_date_time;
+  DateTime startDateTime;
+  DateTime endDateTime;
   double estimated_work_party_size;
   String leader;
   String image_url;
+  WorkPartyType type;
 
   WorkParty();
 
@@ -25,8 +27,13 @@ class WorkParty {
     wpItem.name = json['name'];
     wpItem.estimated_work_party_size = json['estimated_work_party_size'];
     wpItem.leader = json['leader']['name'];
-    wpItem.image_url = json['image_url']?.toString();
+    wpItem.overview = json['overview'];
+    wpItem.aboutArea = json['about_the_area'];
+    wpItem.type = WorkPartyType.fromJson(json['work_party_type']);
+    wpItem.startDateTime = DateTime.parse(json['start_date_time']).toLocal();
+    wpItem.endDateTime = DateTime.parse(json['end_date_time']).toLocal();
 
+    wpItem.image_url = json['image_url']?.toString();
     if (wpItem.image_url == null || wpItem.image_url.isEmpty)
     {
       wpItem.image_url = 'https://www.wta.org/++theme++plonetheme.wta/images/wta-logo.png';
@@ -43,6 +50,24 @@ class WorkParty {
   @override
   String toString() {
     return '$name by $leader';
+  }
+}
+
+class WorkPartyType {
+  String name;
+  String friendsFamilyHelpText;
+  bool allowGuestRegistrations;
+
+  WorkPartyType();
+
+  factory WorkPartyType.fromJson(Map<String, dynamic> json)
+  {
+    var instance = new WorkPartyType();
+
+    instance.name = json['name'];
+    instance.friendsFamilyHelpText = json['friends_family_help_text'];
+    instance.allowGuestRegistrations = json['allow_guest_registrations'];
+    return instance;
   }
 }
 
