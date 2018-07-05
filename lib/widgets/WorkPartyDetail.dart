@@ -3,6 +3,8 @@ import 'package:wta_flutter/model/WorkParty.dart';
 import 'package:wta_flutter/widgets/PageSection.dart';
 import 'package:wta_flutter/widgets/SectionContentText.dart';
 import 'package:wta_flutter/model/Utils.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong/latlong.dart';
 
 class WorkPartyDetailWidget extends StatelessWidget {
   WorkParty _item;
@@ -28,6 +30,31 @@ class WorkPartyDetailWidget extends StatelessWidget {
     );
     _widgetList.add(new PageSectionWidget('Overview', new SectionContentTextWidget(_item.overview)));
     _widgetList.add(new PageSectionWidget('About the area', new SectionContentTextWidget(_item.aboutArea)));
+    var mapWidget = FlutterMap(
+      options: new MapOptions(
+        center: new LatLng(51.5, -0.09),
+        zoom: 5.0,
+      ),
+      layers: [
+        new TileLayerOptions(
+            urlTemplate:
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            subdomains: ['a', 'b', 'c']),
+        new MarkerLayerOptions(markers: [
+          new Marker(
+            width: 80.0,
+            height: 80.0,
+            point: new LatLng(51.5, -0.09),
+            builder: (ctx) =>
+            new Container(
+              child: new FlutterLogo(),
+            ),
+          ),
+        ])
+      ],
+    );
+
+    _widgetList.add(new PageSectionWidget('Where', new Flexible(child: mapWidget)));
   }
 
   Widget _builder(BuildContext context, int index)

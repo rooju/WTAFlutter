@@ -17,7 +17,8 @@ class PageSectionWidget extends StatelessWidget
         children: <Widget>[
           new SectionHeadingTextWidget(_headingText),
           _contentWidget
-        ]
+        ],
+        mainAxisSize: MainAxisSize.min,
       )
     );
   }
